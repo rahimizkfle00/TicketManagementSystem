@@ -62,17 +62,14 @@ Ticket Management System is a local helpdesk ticket tracking system developed us
 
 The database connection file is located at:
 
-```text
 src/main/java/com/helpdesk/util/DBConnection.java
-```
 
 Default database configuration:
 
-```java
+
 private static final String URL = "jdbc:postgresql://localhost:5432/helpdeskdb";
 private static final String USER = "postgres";
 private static final String PASSWORD = "admin";
-```
 
 If the PostgreSQL password is different, update the password in `DBConnection.java`.
 
@@ -89,10 +86,8 @@ If the PostgreSQL password is different, update the password in `DBConnection.ja
 | 7    | Open the system in browser                                                  |
 
 Application URL:
-
-```text
 http://localhost:8080/TicketManagement/dashboard
-```
+
 
 ## Testing Checklist
 
