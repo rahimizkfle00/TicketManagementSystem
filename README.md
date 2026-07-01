@@ -1,6 +1,5 @@
 ## Application Title               
-| ------------------------------- |
-| Ticket Management System ver1.0 |
+Ticket Management System ver1.0 
 
 ## Description
 
