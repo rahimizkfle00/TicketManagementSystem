@@ -1,4 +1,3 @@
-````markdown
 # Ticket Management System
 
 ## Description
@@ -314,5 +313,3 @@ src/main/webapp/WEB-INF/lib
 
 Version 1.0 completed for local testing and colleague review.
 
-```
-```
