@@ -1,5 +1,10 @@
-## Application Title               
-Ticket Management System ver1.0 
+# Ticket Management System
+
+## Title of the application
+
+| Application Title               |
+| ------------------------------- |
+| Ticket Management System ver1.0 |
 
 ## Description
 
@@ -83,19 +88,27 @@ Before running this project, please install:
 ## Database Connection
 
 The database connection file is located at:
+
+```text
 src/main/java/com/helpdesk/util/DBConnection.java
+```
 
 Default database configuration:
 
+```java
 private static final String URL = "jdbc:postgresql://localhost:5432/helpdeskdb";
 private static final String USER = "postgres";
 private static final String PASSWORD = "admin";
-
+```
 
 If your PostgreSQL password is different, update the password in `DBConnection.java`.
 
 Example:
+
+```java
 private static final String PASSWORD = "your_password";
+```
+
 ---
 
 ## How to Run the Application
@@ -111,11 +124,23 @@ private static final String PASSWORD = "your_password";
 | 7    | Open the system in browser                                                  |
 
 Application URL:
+
+```text
 http://localhost:8080/TicketManagement/dashboard
+```
 
 ---
 
 ## Tester / Colleague Instruction
+
+Hi, please help to test this local Helpdesk Ticket Management System.
+
+GitHub repository:
+
+```text
+PASTE_GITHUB_REPOSITORY_LINK_HERE
+```
+
 Please install the required software first:
 
 1. Eclipse IDE for Enterprise Java and Web Developers
@@ -129,14 +154,17 @@ Please install the required software first:
 
 1. Open pgAdmin.
 2. Create a database named:
+
+```sql
 helpdeskdb
+```
 
 3. Open Query Tool under `helpdeskdb`.
 4. Copy and run the SQL script from:
 
 ```text
 database.sql
-
+```
 
 5. Make sure the table `tickets` is created.
 
@@ -156,13 +184,16 @@ database.sql
 ### Database Password
 
 Open this file:
-src/main/java/com/helpdesk/util/DBConnection.java
 
+```text
+src/main/java/com/helpdesk/util/DBConnection.java
+```
 
 Check this line:
 
+```java
 private static final String PASSWORD = "admin";
-
+```
 
 If your PostgreSQL password is different, change `"admin"` to your own PostgreSQL password.
 
@@ -173,8 +204,9 @@ If your PostgreSQL password is different, change `"admin"` to your own PostgreSQ
 3. Select Tomcat 11.
 4. Open browser:
 
+```text
 http://localhost:8080/TicketManagement/dashboard
-
+```
 
 ---
 
@@ -214,9 +246,12 @@ http://localhost:8080/TicketManagement/dashboard
 * Ticket number is entered manually because the official ticket number is provided separately.
 * The PostgreSQL JDBC driver is included inside:
 
+```text
 src/main/webapp/WEB-INF/lib
+```
 
 * Use Apache Tomcat 11 because the system uses Jakarta Servlet.
+
 ---
 
 ## Project Status
