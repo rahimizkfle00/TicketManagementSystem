@@ -1,4 +1,4 @@
-| Application Title               |
+| ## Application Title               |
 | ------------------------------- |
 | Ticket Management System ver1.0 |
 
