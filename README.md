@@ -38,8 +38,8 @@ This system allows users to record, view, update, search, filter, delete, export
 | 4 | <img width="1277" height="788" alt="image" src="https://github.com/user-attachments/assets/85db496b-5e70-47f6-91f0-11cc6efd8660" /> | Full ticket details page |
 | 5 | <img width="1147" height="467" alt="image" src="https://github.com/user-attachments/assets/df90bb0d-f3d0-4dcb-921c-66271ca9196f" /> | Edit ticket form page |
 | 6 | <img width="1542" height="748" alt="image" src="https://github.com/user-attachments/assets/356620e7-3624-4367-b9e3-972683f978a7" /> | Exported CSV file opened in Excel |
-| 7 | <img width="1900" alt="Upload Proof Screenshot" src="PASTE_UPLOAD_PROOF_IMAGE_LINK_HERE" /> | Upload proof page for before photo, after photo, and scanned CM form |
-| 8 | <img width="1900" alt="Proof Evidence Screenshot" src="PASTE_PROOF_EVIDENCE_IMAGE_LINK_HERE" /> | Proof evidence section showing uploaded files and delete buttons |
+| 7 | <img width="980" height="367" alt="image" src="https://github.com/user-attachments/assets/5866d793-5a67-4f9f-9646-2ab2da847c2e" />  | Upload proof page for before photo, after photo, and scanned CM form |
+| 8 | <img width="970" height="377" alt="image" src="https://github.com/user-attachments/assets/554262e0-e0f0-404d-a6e2-a17aedb9b157" />| Proof evidence section showing uploaded files and delete buttons |
 
 ---
 
