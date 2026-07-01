@@ -1,7 +1,3 @@
-# Ticket Management System
-
-## Title of your application
-
 | Application Title               |
 | ------------------------------- |
 | Ticket Management System ver1.0 |
