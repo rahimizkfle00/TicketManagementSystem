@@ -34,7 +34,7 @@ This system allows users to record, view, update, search, filter, delete, export
 | --- | ---------- | ----------- |
 | 1 | <img width="1695" height="937" alt="image" src="https://github.com/user-attachments/assets/4374013a-5741-4679-9ad9-4c45bb057438" /> | Dashboard page showing ticket summary and charts |
 | 2 | <img width="1563" height="565" alt="image" src="https://github.com/user-attachments/assets/7bc8a235-7de4-4b34-8f1e-f955185256c1" /> | Add ticket form page |
-| 3 | <img width="1302" height="766" alt="image" src="https://github.com/user-attachments/assets/05f2d0c3-364e-4ddc-9d53-cf0f5f56b37b" /> | Ticket list page with search, filter, and proof button |
+| 3 | <img width="1503" height="857" alt="image" src="https://github.com/user-attachments/assets/f0586b69-a0a1-4634-8c6d-dc5f8c574d0d" /> | | Ticket list page displaying saved tickets with search, filter, view, edit, proof upload, and delete actions  |
 | 4 | <img width="1277" height="788" alt="image" src="https://github.com/user-attachments/assets/85db496b-5e70-47f6-91f0-11cc6efd8660" /> | Full ticket details page |
 | 5 | <img width="1147" height="467" alt="image" src="https://github.com/user-attachments/assets/df90bb0d-f3d0-4dcb-921c-66271ca9196f" /> | Edit ticket form page |
 | 6 | <img width="1542" height="748" alt="image" src="https://github.com/user-attachments/assets/356620e7-3624-4367-b9e3-972683f978a7" /> | Exported CSV file opened in Excel |
