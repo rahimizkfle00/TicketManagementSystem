@@ -49,4 +49,8 @@ public class Ticket {
     
     public Timestamp createdAt;
     public Timestamp updatedAt;
+    
+    public String beforePhoto;
+    public String afterPhoto;
+    public String cmFormFile;
 }

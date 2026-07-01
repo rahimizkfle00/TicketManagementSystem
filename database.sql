@@ -45,5 +45,9 @@ CREATE TABLE tickets (
     prt_stop_3 TEXT,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    before_photo VARCHAR(255),
+	after_photo VARCHAR(255),
+	cm_form_file VARCHAR(255)
 );

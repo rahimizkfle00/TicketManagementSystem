@@ -1,8 +1,6 @@
 package com.helpdesk.servlet;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -50,27 +48,24 @@ public class AddTicketServlet extends HttpServlet {
             ticket.rootCause = getValue(request, "rootCause");
 
             ticket.actionTaken1 = getValue(request, "actionTaken1");
-            ticket.rrt1 = toSqlTimestamp(getValue(request, "rrt1"));
-            ticket.irt1 = toSqlTimestamp(getValue(request, "irt1"));
-            ticket.ort1 = toSqlTimestamp(getValue(request, "ort1"));
+            ticket.rrt1 = toTimestamp(getValue(request, "rrt1"));
+            ticket.irt1 = toTimestamp(getValue(request, "irt1"));
+            ticket.ort1 = toTimestamp(getValue(request, "ort1"));
             ticket.prtStop1 = getValue(request, "prtStop1");
 
             ticket.action2Enabled = request.getParameter("action2Enabled") != null;
             ticket.actionTaken2 = getValue(request, "actionTaken2");
-            ticket.ort2 = toSqlTimestamp(getValue(request, "ort2"));
+            ticket.ort2 = toTimestamp(getValue(request, "ort2"));
             ticket.prtStop2 = getValue(request, "prtStop2");
 
             ticket.action3Enabled = request.getParameter("action3Enabled") != null;
             ticket.actionTaken3 = getValue(request, "actionTaken3");
-            ticket.ort3 = toSqlTimestamp(getValue(request, "ort3"));
+            ticket.ort3 = toTimestamp(getValue(request, "ort3"));
             ticket.prtStop3 = getValue(request, "prtStop3");
 
             TicketDAO.saveTicket(ticket);
 
-            String ticketNo = ticket.ticketNumber == null ? "" : ticket.ticketNumber;
-            String encodedTicketNo = URLEncoder.encode(ticketNo, StandardCharsets.UTF_8);
-
-            response.sendRedirect("addTicket.jsp?success=1&ticketNo=" + encodedTicketNo);
+            response.sendRedirect("addTicket.jsp?success=1&ticketNo=" + encode(ticket.ticketNumber));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,24 +98,23 @@ public class AddTicketServlet extends HttpServlet {
             return null;
         }
 
-        if (value.length() == 5) {
-            value = value + ":00";
-        }
-
-        return Time.valueOf(value);
+        return Time.valueOf(value + ":00");
     }
 
-    private Timestamp toSqlTimestamp(String value) {
+    private Timestamp toTimestamp(String value) {
         if (value == null) {
             return null;
         }
 
-        value = value.replace("T", " ");
+        String formattedValue = value.replace("T", " ") + ":00";
+        return Timestamp.valueOf(formattedValue);
+    }
 
-        if (value.length() == 16) {
-            value = value + ":00";
+    private String encode(String value) {
+        if (value == null) {
+            return "";
         }
 
-        return Timestamp.valueOf(value);
+        return value.replace(" ", "%20");
     }
 }

@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <form action="ticket-list" method="get">
+        <form action="${pageContext.request.contextPath}/ticket-list" method="get">
 
             <div class="filter-grid">
 
@@ -162,7 +162,7 @@
 
                 <div class="filter-actions">
                     <button type="submit" class="filter-btn">Search</button>
-                    <a href="ticket-list" class="reset-filter-btn">Reset</a>
+                    <a href="${pageContext.request.contextPath}/ticket-list" class="reset-filter-btn">Reset</a>
                 </div>
 
             </div>
@@ -184,12 +184,11 @@
                 </div>
             </div>
 
-           
-<div class="dashboard-actions">
-    <a href="${pageContext.request.contextPath}/dashboard" class="top-action-btn">← Dashboard</a>
-    <a href="${pageContext.request.contextPath}/addTicket.jsp" class="top-action-btn">+ Add Ticket</a>
-    <a href="${pageContext.request.contextPath}/export-tickets" class="top-action-btn">Export CSV</a>
-</div>
+            <div class="dashboard-actions">
+                <a href="${pageContext.request.contextPath}/dashboard" class="top-action-btn">← Dashboard</a>
+                <a href="${pageContext.request.contextPath}/addTicket.jsp" class="top-action-btn">+ Add Ticket</a>
+                <a href="${pageContext.request.contextPath}/export-tickets" class="top-action-btn">Export CSV</a>
+            </div>
 
         </div>
 
@@ -211,6 +210,7 @@
                         <th>Issue</th>
                         <th>View</th>
                         <th>Edit</th>
+                        <th>Proof</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -222,7 +222,7 @@
                         if (ticketList == null || ticketList.isEmpty()) {
                     %>
                         <tr>
-                            <td colspan="14" class="empty-row">No tickets found.</td>
+                            <td colspan="15" class="empty-row">No tickets found.</td>
                         </tr>
                     <%
                         } else {
@@ -250,15 +250,19 @@
                             <td class="issue-cell"><%= ticket.issue == null ? "-" : ticket.issue %></td>
 
                             <td>
-                                <a href="view-ticket?id=<%= ticket.ticketId %>" class="view-btn">View</a>
+                                <a href="${pageContext.request.contextPath}/view-ticket?id=<%= ticket.ticketId %>" class="view-btn">View</a>
                             </td>
 
                             <td>
-                                <a href="edit-ticket?id=<%= ticket.ticketId %>" class="edit-btn">Edit</a>
+                                <a href="${pageContext.request.contextPath}/edit-ticket?id=<%= ticket.ticketId %>" class="edit-btn">Edit</a>
                             </td>
 
                             <td>
-                                <a href="delete-ticket?id=<%= ticket.ticketId %>"
+                                <a href="${pageContext.request.contextPath}/uploadProof.jsp?id=<%= ticket.ticketId %>" class="edit-btn">Proof</a>
+                            </td>
+
+                            <td>
+                                <a href="${pageContext.request.contextPath}/delete-ticket?id=<%= ticket.ticketId %>"
                                    class="delete-btn"
                                    onclick="return confirm('Are you sure you want to delete this ticket?');">
                                    Delete

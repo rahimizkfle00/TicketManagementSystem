@@ -13,7 +13,27 @@ import com.helpdesk.model.Ticket;
 import com.helpdesk.util.DBConnection;
 
 public class TicketDAO {
+	public static int updateProofFiles(int ticketId, String beforePhoto, String afterPhoto, String cmFormFile) throws Exception {
 
+	    String sql =
+	        "UPDATE tickets SET " +
+	        "before_photo = COALESCE(?, before_photo), " +
+	        "after_photo = COALESCE(?, after_photo), " +
+	        "cm_form_file = COALESCE(?, cm_form_file), " +
+	        "updated_at = CURRENT_TIMESTAMP " +
+	        "WHERE ticket_id = ?";
+
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, beforePhoto);
+	        ps.setString(2, afterPhoto);
+	        ps.setString(3, cmFormFile);
+	        ps.setInt(4, ticketId);
+
+	        return ps.executeUpdate();
+	    }
+	}
     public static int saveTicket(Ticket ticket) throws Exception {
 
         String sql =
@@ -113,7 +133,6 @@ public class TicketDAO {
             ps.setInt(1, ticketId);
 
             try (ResultSet rs = ps.executeQuery()) {
-
                 if (rs.next()) {
                     ticket = mapTicket(rs);
                 }
@@ -258,7 +277,6 @@ public class TicketDAO {
             }
 
             try (ResultSet rs = ps.executeQuery()) {
-
                 while (rs.next()) {
                     ticketList.add(mapTicket(rs));
                 }
@@ -359,7 +377,62 @@ public class TicketDAO {
 
         return categoryMap;
     }
+    public static String getProofFilePath(int ticketId, String proofType) throws Exception {
 
+        String columnName = getProofColumnName(proofType);
+
+        String sql = "SELECT " + columnName + " FROM tickets WHERE ticket_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, ticketId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString(columnName);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static int deleteProofFile(int ticketId, String proofType) throws Exception {
+
+        String columnName = getProofColumnName(proofType);
+
+        String sql =
+            "UPDATE tickets SET " +
+            columnName + " = NULL, " +
+            "updated_at = CURRENT_TIMESTAMP " +
+            "WHERE ticket_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, ticketId);
+
+            return ps.executeUpdate();
+        }
+    }
+
+    private static String getProofColumnName(String proofType) throws Exception {
+
+        if ("before".equals(proofType)) {
+            return "before_photo";
+        }
+
+        if ("after".equals(proofType)) {
+            return "after_photo";
+        }
+
+        if ("cm".equals(proofType)) {
+            return "cm_form_file";
+        }
+
+        throw new Exception("Invalid proof file type.");
+    }
     private static Ticket mapTicket(ResultSet rs) throws Exception {
 
         Ticket ticket = new Ticket();
@@ -407,6 +480,11 @@ public class TicketDAO {
 
         ticket.createdAt = rs.getTimestamp("created_at");
         ticket.updatedAt = rs.getTimestamp("updated_at");
+
+        ticket.beforePhoto = rs.getString("before_photo");
+        ticket.afterPhoto = rs.getString("after_photo");
+        
+        ticket.cmFormFile = rs.getString("cm_form_file");
 
         return ticket;
     }

@@ -19,10 +19,19 @@
             return value.toString();
         }
     }
+
+    public boolean hasValue(String value) {
+        return value != null && !value.trim().isEmpty();
+    }
+
+    public boolean isPdf(String value) {
+        return value != null && value.toLowerCase().endsWith(".pdf");
+    }
 %>
 
 <%
     Ticket ticket = (Ticket) request.getAttribute("ticket");
+    String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -32,6 +41,54 @@
     <title>View Ticket</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .proof-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .proof-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 16px;
+            background: #ffffff;
+        }
+
+        .proof-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 15px;
+            color: #374151;
+        }
+
+        .proof-box img {
+            width: 100%;
+            max-height: 260px;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .proof-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .proof-empty {
+            padding: 22px;
+            border-radius: 12px;
+            background: #f9fafb;
+            color: #6b7280;
+            text-align: center;
+            border: 1px dashed #d1d5db;
+        }
+    </style>
 </head>
 
 <body class="helpdesk-page">
@@ -43,7 +100,7 @@
         <div class="logo-box">🔎</div>
         <div>
             <h1>Ticket Details</h1>
-            <p>Full helpdesk ticket information and action records</p>
+            <p>Full helpdesk ticket information, action records and proof files</p>
         </div>
     </div>
 
@@ -56,6 +113,12 @@
     <% if (request.getAttribute("errorMessage") != null) { %>
         <div class="error-message">
             ❌ Error: <%= request.getAttribute("errorMessage") %>
+        </div>
+    <% } %>
+
+    <% if ("1".equals(request.getParameter("proofUploaded"))) { %>
+        <div class="success-message">
+            ✅ Proof files uploaded successfully.
         </div>
     <% } %>
 
@@ -73,7 +136,10 @@
                 </div>
             </div>
 
-            <a href="${pageContext.request.contextPath}/ticket-list" class="top-action-btn">← Back to List</a>
+            <div class="dashboard-actions">
+                <a href="${pageContext.request.contextPath}/ticket-list" class="top-action-btn">← Back to List</a>
+                <a href="${pageContext.request.contextPath}/uploadProof.jsp?id=<%= ticket.ticketId %>" class="top-action-btn">Upload / View Proof</a>
+            </div>
         </div>
 
         <div class="detail-grid">
@@ -106,6 +172,68 @@
             <div class="detail-item">
                 <span>Last Updated</span>
                 <strong><%= dateTimeValue(ticket.updatedAt) %></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROOF EVIDENCE -->
+    <div class="card helpdesk-card-space">
+
+        <div class="section-title section-title-between">
+            <div class="section-title-left">
+                <div class="section-icon purple-dark">📁</div>
+                <div>
+                    <h2>Proof Evidence</h2>
+                    <p>Before photo, after photo and scanned CM form</p>
+                </div>
+            </div>
+
+            <a href="${pageContext.request.contextPath}/uploadProof.jsp?id=<%= ticket.ticketId %>" class="top-action-btn">Upload Proof</a>
+        </div>
+
+        <div class="proof-preview-grid">
+
+            <div class="proof-box">
+                <h3>Before Photo</h3>
+
+                <% if (hasValue(ticket.beforePhoto)) { %>
+                    <img src="<%= contextPath + "/" + ticket.beforePhoto %>" alt="Before Photo">
+                    <a class="proof-link" href="<%= contextPath + "/" + ticket.beforePhoto %>" target="_blank">Open Before Photo</a>
+                <% } else { %>
+                    <div class="proof-empty">No before photo uploaded yet.</div>
+                <% } %>
+            </div>
+
+            <div class="proof-box">
+                <h3>After Photo</h3>
+
+                <% if (hasValue(ticket.afterPhoto)) { %>
+                    <img src="<%= contextPath + "/" + ticket.afterPhoto %>" alt="After Photo">
+                    <a class="proof-link" href="<%= contextPath + "/" + ticket.afterPhoto %>" target="_blank">Open After Photo</a>
+                <% } else { %>
+                    <div class="proof-empty">No after photo uploaded yet.</div>
+                <% } %>
+            </div>
+
+            <div class="proof-box">
+                <h3>Scanned CM Form</h3>
+
+                <% if (hasValue(ticket.cmFormFile)) { %>
+
+                    <% if (isPdf(ticket.cmFormFile)) { %>
+                        <div class="proof-empty">PDF CM form uploaded.</div>
+                        <a class="proof-link" href="<%= contextPath + "/" + ticket.cmFormFile %>" target="_blank">Open Scanned CM Form</a>
+                    <% } else { %>
+                        <img src="<%= contextPath + "/" + ticket.cmFormFile %>" alt="Scanned CM Form">
+                        <a class="proof-link" href="<%= contextPath + "/" + ticket.cmFormFile %>" target="_blank">Open Scanned CM Form</a>
+                    <% } %>
+
+                <% } else { %>
+                    <div class="proof-empty">No scanned CM form uploaded yet.</div>
+                <% } %>
             </div>
 
         </div>
