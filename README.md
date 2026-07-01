@@ -249,5 +249,6 @@ src/main/webapp/WEB-INF/lib
 ---
 
 ## Project Status
+Version 1.0 Completed for local testing and colleague review.
 
-Completed for local testing and colleague review.
+
