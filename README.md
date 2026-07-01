@@ -1,11 +1,5 @@
 # Ticket Management System
 
-## Title of the application
-
-| Application Title               |
-| ------------------------------- |
-| Ticket Management System ver1.0 |
-
 ## Description
 
 Ticket Management System is a local helpdesk ticket tracking system developed using **JSP**, **Servlet**, **PostgreSQL**, and **Apache Tomcat**.
